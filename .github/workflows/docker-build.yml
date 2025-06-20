@@ -28,6 +28,20 @@ jobs:
           push: true
           tags: idriss98/flaskapp:latest
 
+
+      - name: Test SSH connection
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          timeout: 30s
+          script: |
+            echo "SSH connection successful!"
+            whoami
+            uname -a
+
       - name: deploying
         uses: appleboy/ssh-action@v0.1.8
         with:
@@ -35,6 +49,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          timeout: 200s
           script: |
             docker image pull idriss98/flaskapp:latest
             docker container stop flask || true
