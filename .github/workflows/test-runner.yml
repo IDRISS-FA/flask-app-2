@@ -1,0 +1,12 @@
+name: Test Runner Connection
+on: [push]
+
+jobs:
+  test:
+    runs-on: self-hosted
+    steps:
+      - name: Check Project Files
+        run: |
+          echo "Project contents:"
+          ls -la /home/kuber/project-ci-cd/flask-app-2
+          echo "Runner workspace: $GITHUB_WORKSPACE"
