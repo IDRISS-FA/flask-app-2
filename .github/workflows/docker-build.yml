@@ -30,7 +30,7 @@ jobs:
 
   deploy:
     name: Deploy to Self-Hosted Server
-    runs-on: ubuntu-kuber
+    runs-on: [self-hosted, ubuntu-kuber]
     needs: build-and-push
 
     steps:
